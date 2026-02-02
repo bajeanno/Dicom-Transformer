@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Yew Application</title>
+    <link rel="stylesheet" href="/style-f8f57b28e5fc794c.css" integrity="sha384-VYQ8Lw09q5lweApvD1M9zUxD8Xb19OMsIOpNDZygmR7gykz7lJ6afE7IF+12qV8q"/>
+<link rel="modulepreload" href="/frontend-a0566c0a5da7314.js" crossorigin="anonymous" integrity="sha384-GtURAO+sRNE+P09Z5yvf04rv3VXrg5iBFtZh58nZb3AIexnDE51Cz41rQoCQmScy"><link rel="preload" href="/frontend-a0566c0a5da7314_bg.wasm" crossorigin="anonymous" integrity="sha384-WR/Npp5G6DlWIEjpQXGjkW5aEdGGXutEmPqfJRVWrvYACQarUOjibXpfJeWKIGnW" as="fetch" type="application/wasm"></head>
+<body>
+
+
+<script type="module">
+import init, * as bindings from '/frontend-a0566c0a5da7314.js';
+const wasm = await init({ module_or_path: '/frontend-a0566c0a5da7314_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+</html>
