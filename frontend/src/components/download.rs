@@ -2,7 +2,6 @@ use gloo_storage::SessionStorage;
 use gloo_storage::Storage;
 use js_sys;
 use wasm_bindgen::JsCast;
-use wasm_bindgen::JsValue;
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{window, Request, RequestInit, Response};
 use yew::prelude::*;
@@ -32,7 +31,7 @@ pub fn download_section() -> Html {
 }
 
 async fn download_transformed_file(uuid: String) -> Result<(), String> {
-    let url = format!("http://localhost:3000/download/{}", uuid);
+    let url = format!("http://localhost:8080/download/{}", uuid);
 
     let window_obj = window().ok_or("No window object available")?;
 
@@ -43,8 +42,9 @@ async fn download_transformed_file(uuid: String) -> Result<(), String> {
     let options = web_sys::BlobPropertyBag::new();
     options.set_type("application/dicom");
 
+    let uint8array = js_sys::Uint8Array::from(bytes.as_slice());
     let blob = web_sys::Blob::new_with_u8_array_sequence_and_options(
-        &js_sys::Array::of1(&JsValue::from(bytes)),
+        &js_sys::Array::of1(&uint8array),
         &options,
     )
     .map_err(|_| "Error creating blob".to_string())?;
