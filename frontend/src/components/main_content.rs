@@ -9,7 +9,7 @@ pub fn main_content() -> Html {
     html! {
         <div class="main-content">
             <UploadSection />
-            <TransformationOptions />
+            // <TransformationOptions /> // options to transform the dicom object
             <DownloadSection />
         </div>
     }
