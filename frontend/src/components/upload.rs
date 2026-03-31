@@ -32,15 +32,19 @@ pub fn upload_section() -> Html {
 
     html! {
         <div class="upload-section">
-            <h2>{"Upload DICOM RD v2"}</h2>
-            <input
-                type="file"
-                ref={file_ref}
-                onchange={handle_file_upload}
-                accept=".*"
-                enctype="multipart/form-data"
-            />
-            <button onclick={on_upload}>{"Upload"}</button>
+            <div>
+                <h2>{"Upload DICOM RD v2"}</h2>
+                <input
+                    type="file"
+                    ref={file_ref}
+                    onchange={handle_file_upload}
+                    accept=".*"
+                    enctype="multipart/form-data"
+                />
+            </div>
+            <div>
+                <button class="button" onclick={on_upload}>{"Upload"}</button>
+            </div>
         </div>
     }
 }

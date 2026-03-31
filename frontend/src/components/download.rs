@@ -8,13 +8,11 @@ use yew::prelude::*;
 
 #[function_component(DownloadSection)]
 pub fn download_section() -> Html {
-    let uuid = use_state(|| String::new());
     let on_download = {
-        let uuid = uuid.clone();
         Callback::from(move |_| {
-            let uuid_clone = (*uuid).clone();
+            let uuid = SessionStorage::get::<String>("dicom_uuid").unwrap_or_default();
             wasm_bindgen_futures::spawn_local(async move {
-                if let Err(e) = download_transformed_file(uuid_clone).await {
+                if let Err(e) = download_transformed_file(uuid).await {
                     log::error!("{}", e);
                 }
             });
@@ -23,7 +21,7 @@ pub fn download_section() -> Html {
 
     html! {
         <div class="download-section">
-            <button onclick={on_download} disabled={uuid.is_empty()}>
+            <button onclick={on_download}>
                 {"Télécharger le fichier transformé"}
             </button>
         </div>
